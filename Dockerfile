@@ -7,7 +7,7 @@
 # docker inspect --format "{{ .NetworkSettings.IPAddress }}" iperf3-srv
 # docker run  -it --rm networkstatic/iperf3 -c <SERVER_IP>
 #
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 MAINTAINER Brent Salisbury <brent.salisbury@gmail.com>
 # install binary and remove cache
 RUN apt-get update \
