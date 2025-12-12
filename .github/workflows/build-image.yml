@@ -2,20 +2,26 @@ name: iPerf3 image CI
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [ master ]
   schedule:
     - cron: '0 0 * * *'  # every day at midnight
   workflow_dispatch:
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the iperf3 image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      - name: "Checkout GitHub Action"
+        uses: actions/checkout@main
+
+      - name: "Login to GitHub Container Registry"
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{github.actor}}
+          password: ${{secrets.GH_TOKEN}}
+
+      - name: "Build and push Docker image"
+        run: |
+          docker build . --tag ghcr.io/jgeek00/iperf3:latest
+          docker push ghcr.io/jgeek00/iperf3:latest

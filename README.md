@@ -13,6 +13,9 @@ Image on Docker Hub [hub.docker.com/r/networkstatic/iperf3/](https://hub.docker.
 
 `docker run -it --rm -p 5201:5201 networkstatic/iperf3 --help`
 
+### Docker Compose
+Check `docker-compose.yml` file.
+
 ### Usage
 
 To test bandwidth between two containers, start a server (listener) and point a client container (initiator) at the server.
